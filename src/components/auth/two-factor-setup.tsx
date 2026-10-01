@@ -2,7 +2,6 @@
 
 import { ApiError } from '@neon-adda/shared/web/client';
 import { ShieldCheck } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState, type FormEvent } from 'react';
 import { CodeInput, FormError, SubmitButton } from '@/components/ui/form';
 import { api } from '@/lib/browser-api';
@@ -14,7 +13,6 @@ interface Setup {
 }
 
 export function TwoFactorSetup({ required }: { required: boolean }) {
-  const router = useRouter();
   const [setup, setSetup] = useState<Setup | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,8 +43,8 @@ export function TwoFactorSetup({ required }: { required: boolean }) {
           code: new FormData(event.currentTarget).get('code'),
         }),
       });
-      router.replace('/');
-      router.refresh();
+      // A full load, so nothing rendered for the previous session survives in the router cache.
+      window.location.replace('/');
     } catch (err) {
       setError(err instanceof ApiError ? err.title : 'Could not verify the code.');
     } finally {

@@ -1,7 +1,6 @@
 'use client';
 
 import { ApiError, type Profile, type SignInResult } from '@neon-adda/shared/web/client';
-import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
 import { CodeInput, Field, FormError, SubmitButton, TextInput } from '@/components/ui/form';
 import { api } from '@/lib/browser-api';
@@ -9,14 +8,13 @@ import { api } from '@/lib/browser-api';
 type Step = { kind: 'password' } | { kind: 'code'; challenge: string };
 
 export function PasswordSignIn({ next }: { next: string }) {
-  const router = useRouter();
   const [step, setStep] = useState<Step>({ kind: 'password' });
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   function finish(user: Profile) {
-    router.replace(user.twoFactorSetupRequired ? '/security' : next);
-    router.refresh();
+    // A full load, so nothing rendered for the previous session survives in the router cache.
+    window.location.replace(user.twoFactorSetupRequired ? '/security' : next);
   }
 
   async function run(action: () => Promise<void>) {

@@ -2,12 +2,10 @@
 
 import type { Profile } from '@neon-adda/shared/web/client';
 import { LogOut } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { api } from '@/lib/browser-api';
 
 export function UserMenu({ profile }: { profile: Profile }) {
-  const router = useRouter();
   const [signingOut, setSigningOut] = useState(false);
   const initials = (profile.name ?? profile.email ?? '?')
     .split(/\s+/)
@@ -19,8 +17,8 @@ export function UserMenu({ profile }: { profile: Profile }) {
   async function signOut() {
     setSigningOut(true);
     await api.signOut();
-    router.replace('/login');
-    router.refresh();
+    // A full load, so nothing rendered for the previous session survives in the router cache.
+    window.location.replace('/login');
   }
 
   return (
