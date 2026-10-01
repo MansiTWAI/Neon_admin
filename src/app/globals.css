@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@import '@neon-adda/shared/theme.css';
+
+body {
+  background: #f7f7f9;
+  color: #111827;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
