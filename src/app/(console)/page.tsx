@@ -46,14 +46,14 @@ export default async function DashboardPage() {
     <>
       <PageHeader title="Dashboard" description="Money in, and the work waiting on each team." />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Collected today" value={formatINR(data.today.collectedPaise)} />
         <Stat label="Collected this month" value={formatINR(data.month.collectedPaise)} />
         <Stat label="Orders today" value={data.today.orders} />
         <Stat label="Orders this month" value={data.month.orders} />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <Card
           title="Collections, last 14 days"
           action={<span className="text-xs text-gray-500">{formatINR(fortnight)}</span>}

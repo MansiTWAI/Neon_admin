@@ -68,7 +68,7 @@ export function NewRule({
         description="Rules cannot be edited once saved, so the rate behind every past commission stays on record. To change a rate, end the old rule and add a new one."
         wide
       >
-        <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+        <form onSubmit={submit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Applies to">
             <Select value={scope} onChange={(e) => setScope(e.target.value as typeof scope)}>
               <option value="DEFAULT">Every franchise</option>
@@ -206,7 +206,7 @@ export function CommissionSettingsForm({
 
   return (
     <form onSubmit={submit}>
-      <fieldset disabled={!allowed} className="grid gap-4 sm:grid-cols-3">
+      <fieldset disabled={!allowed} className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Field label="Payable after (days)" hint="Counted from completion; covers the return window.">
           <TextInput
             name="eligibilityDays"

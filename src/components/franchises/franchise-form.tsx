@@ -73,7 +73,7 @@ export function FranchiseForm({
 
   return (
     <form onSubmit={submit}>
-      <fieldset disabled={!canWrite} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <fieldset disabled={!canWrite} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Field label="Franchise name" error={error('name')} className="sm:col-span-2">
           <TextInput
             name="name"

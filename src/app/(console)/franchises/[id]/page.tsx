@@ -11,6 +11,7 @@ import { NoAccess } from '@/components/no-access';
 import { PageHeader } from '@/components/page-header';
 import { Badge, Card, DefinitionList, Stat } from '@/components/ui/data';
 import { formatDate, formatDateTime, ORDER_STATUS } from '@/lib/format';
+import { STORE_URL } from '@/lib/env';
 import { FORBIDDEN, load } from '@/lib/load';
 
 export const metadata: Metadata = { title: 'Franchise' };
@@ -26,7 +27,6 @@ interface Franchise extends FranchiseValue {
   } | null;
   pincodes: string[];
   technicians: { id: string; name: string; phone: string; skills: string[]; isActive: boolean }[];
-  kioskDevices: { id: string; name: string; lastSeenAt: string | null }[];
   recentOrders: {
     orderNo: string;
     status: OrderStatus;
@@ -86,7 +86,7 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
         </Link>
       </PageHeader>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Stat label="Confirmed orders" value={franchise.stats.orders} />
         <Stat label="Sales before GST" value={formatINR(franchise.stats.salesPaise)} />
         <Stat
@@ -96,7 +96,7 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
         />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_340px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-6">
           <Card title="Details">
             <FranchiseForm franchise={franchise} tiers={tiers} />
@@ -108,7 +108,7 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
             <Card title="Recent orders">
               <ul className="divide-y divide-gray-100 text-sm">
                 {franchise.recentOrders.map((o) => (
-                  <li key={o.orderNo} className="flex items-center justify-between gap-3 py-2">
+                  <li key={o.orderNo} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
                     <Link href={`/orders/${o.orderNo}`} className="font-medium hover:text-brand">
                       {o.orderNo}
                     </Link>
@@ -116,7 +116,7 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
                     <span className="text-xs text-gray-400">
                       {o.attributionSource === 'SELF_SOURCED' ? 'their customer' : 'assigned'}
                     </span>
-                    <span className="tabular-nums">{formatINR(o.totalPaise)}</span>
+                    <span className="ml-auto tabular-nums">{formatINR(o.totalPaise)}</span>
                     <span className="text-gray-400">{formatDate(o.createdAt)}</span>
                   </li>
                 ))}
@@ -148,21 +148,14 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
           <Card title={`Technicians (${franchise.technicians.length})`}>
             <TechnicianList franchiseId={franchise.id} technicians={franchise.technicians} />
           </Card>
-          <Card title="Kiosk devices">
-            {franchise.kioskDevices.length ? (
-              <ul className="space-y-1 text-sm">
-                {franchise.kioskDevices.map((d) => (
-                  <li key={d.id} className="flex justify-between">
-                    <span>{d.name}</span>
-                    <span className="text-gray-400">
-                      {d.lastSeenAt ? formatDateTime(d.lastSeenAt) : 'Not seen'}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-500">No kiosks paired.</p>
-            )}
+          <Card title="Standee link">
+            <p className="text-sm break-all text-gray-900">
+              {STORE_URL}/studio?ref={franchise.code}
+            </p>
+            <p className="mt-2 text-xs text-gray-500">
+              Orders placed through it go to this franchise at its own-sourced commission rate. The partner
+              prints the QR code from their portal.
+            </p>
           </Card>
         </aside>
       </div>

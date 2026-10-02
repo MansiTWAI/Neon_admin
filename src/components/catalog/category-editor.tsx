@@ -86,7 +86,7 @@ function CategoryForm({ category, onDone }: { category: Category | null; onDone:
   return (
     <form
       onSubmit={submit}
-      className="grid gap-3 rounded-xl border border-brand/30 bg-white p-4 sm:grid-cols-2"
+      className="grid grid-cols-1 gap-3 rounded-xl border border-brand/30 bg-white p-4 sm:grid-cols-2"
     >
       <Field label="Name" error={action.fieldErrors.name}>
         <TextInput name="name" defaultValue={category?.name} required />

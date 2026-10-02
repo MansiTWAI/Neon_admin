@@ -61,7 +61,7 @@ export function RulesForm({ rules }: { rules: PricingRulesValue }) {
 
   return (
     <form onSubmit={submit}>
-      <fieldset disabled={!canPublish} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <fieldset disabled={!canPublish} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Field
           label="Multi-colour surcharge (%)"
           hint="Added when lines use different colours."
@@ -168,7 +168,10 @@ export function AddonsEditor({ addons: initial }: { addons: AddonValue[] }) {
     <div className="space-y-3">
       <fieldset disabled={!canPublish} className="space-y-2">
         {addons.map((addon, i) => (
-          <div key={addon.key} className="grid items-center gap-2 sm:grid-cols-[140px_1fr_150px_110px_auto]">
+          <div
+            key={addon.key}
+            className="grid grid-cols-1 items-center gap-2 lg:grid-cols-[140px_minmax(0,1fr)_150px_110px_auto]"
+          >
             <TextInput
               aria-label="Code"
               value={addon.code}

@@ -81,7 +81,7 @@ export function CouponDialog({ coupon }: { coupon: Coupon | null }) {
         title={coupon ? `Edit ${coupon.code}` : 'New coupon'}
         wide
       >
-        <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+        <form onSubmit={submit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Code" error={error('code')}>
             <TextInput
               name="code"

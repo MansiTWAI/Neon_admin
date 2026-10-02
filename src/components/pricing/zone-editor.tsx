@@ -114,7 +114,7 @@ export function ZoneForm({ zone, onDone }: { zone: Zone | null; onDone: () => vo
   return (
     <form
       onSubmit={submit}
-      className="mt-4 grid gap-4 border-t border-gray-100 pt-4 sm:grid-cols-2 lg:grid-cols-4"
+      className="mt-4 grid grid-cols-1 gap-4 border-t border-gray-100 pt-4 sm:grid-cols-2 lg:grid-cols-4"
     >
       <Field label="Name" error={error('name')}>
         <TextInput name="name" defaultValue={zone?.name} required />

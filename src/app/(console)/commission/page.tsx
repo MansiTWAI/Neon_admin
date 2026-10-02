@@ -39,7 +39,7 @@ export default async function LedgerPage({
 
   return (
     <>
-      <div className="mb-5 grid gap-3 sm:grid-cols-4">
+      <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-4">
         {(['PENDING', 'ELIGIBLE', 'APPROVED', 'PAID'] as const).map((s) => (
           <div key={s} className="rounded-xl border border-gray-200 bg-white px-4 py-3">
             <p className="text-xs text-gray-500">{COMMISSION_STATUS[s].label}</p>

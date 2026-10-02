@@ -120,7 +120,7 @@ export function QuoteBuilder({ quote, gstRatePct }: { quote: AdminQuote; gstRate
         {lines.map((line, i) => (
           <div
             key={line.key}
-            className="grid gap-2 rounded-xl border border-gray-200 p-3 sm:grid-cols-[1fr_70px_70px_60px_130px_auto]"
+            className="grid grid-cols-1 gap-2 rounded-xl border border-gray-200 p-3 sm:grid-cols-[minmax(0,1fr)_70px_70px_60px_130px_auto]"
           >
             <Field label={i === 0 ? 'Description' : ''} error={save.fieldErrors[`items.${i}.description`]}>
               <TextInput
@@ -192,7 +192,7 @@ export function QuoteBuilder({ quote, gstRatePct }: { quote: AdminQuote; gstRate
         </Button>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Field label="Discount" optional>
           <MoneyInput
             value={discount}

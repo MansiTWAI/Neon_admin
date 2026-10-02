@@ -33,7 +33,7 @@ export function CompanyForm({ company }: { company: Company | null }) {
 
   return (
     <form onSubmit={submit}>
-      <fieldset disabled={!allowed} className="grid gap-4 sm:grid-cols-2">
+      <fieldset disabled={!allowed} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="Legal name" error={error('legalName')}>
           <TextInput name="legalName" defaultValue={company?.legalName} required />
         </Field>

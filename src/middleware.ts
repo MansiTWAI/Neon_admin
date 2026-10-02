@@ -9,5 +9,5 @@ export const middleware = createSessionMiddleware({
 
 export const config = {
   // Everything except the API proxy, Next.js assets, the push service worker and notification icons.
-  matcher: ['/((?!v1/|_next|firebase-messaging-sw|icon-192|badge-72|favicon).*)'],
+  matcher: ['/((?!v1/|_next|firebase-messaging-sw|icon|badge-72|favicon).*)'],
 };

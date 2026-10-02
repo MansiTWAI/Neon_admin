@@ -86,7 +86,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-6">
           <Card title={order.items.length === 1 ? 'Sign' : `Signs (${order.items.length})`}>
             <ul className="-my-5 divide-y divide-gray-100">

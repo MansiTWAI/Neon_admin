@@ -130,9 +130,9 @@ export function ProductForm({
   const error = (field: string) => action.fieldErrors[field];
 
   return (
-    <form onSubmit={submit} className="grid gap-6 lg:grid-cols-[1fr_300px]">
+    <form onSubmit={submit} className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
       <fieldset disabled={!canWrite} className="space-y-5 rounded-2xl border border-gray-200 bg-white p-5">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Name" error={error('name')}>
             <TextInput
               value={name}
@@ -244,7 +244,7 @@ export function ProductForm({
               {error('design') && <p className="mt-1 text-xs text-red-600">{error('design')}</p>}
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Field label="Font">
                 <Select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}>
                   {assets.fonts.map((f) => (
@@ -333,7 +333,7 @@ export function ProductForm({
           </>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Highlights" optional hint="One per line, shown as a checklist.">
             <TextArea name="highlights" defaultValue={product?.highlights.join('\n') ?? ''} rows={4} />
           </Field>

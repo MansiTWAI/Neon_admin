@@ -71,7 +71,7 @@ export default async function CustomerPage({ params }: { params: Promise<{ id: s
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Stat label="Orders" value={customer.orders.length} />
         <Stat label="Paid in total" value={formatINR(customer.paidPaise)} />
         <Stat
@@ -81,7 +81,7 @@ export default async function CustomerPage({ params }: { params: Promise<{ id: s
         />
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-6">
           <section>
             <h2 className="mb-3 text-sm font-semibold text-gray-900">Orders</h2>
