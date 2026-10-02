@@ -24,12 +24,12 @@ interface Dashboard {
 
 /** The day's work, in the order it usually gets done. */
 const QUEUES: { key: string; label: string; href: string }[] = [
-  { key: 'awaiting-payment', label: 'Awaiting payment', href: '/orders?queue=awaiting-payment' },
   { key: 'needs-proof', label: 'Proofs to send', href: '/orders?queue=needs-proof' },
   { key: 'with-customer', label: 'Proofs with customers', href: '/orders?queue=with-customer' },
   { key: 'production', label: 'In production', href: '/orders?queue=production' },
   { key: 'dispatch', label: 'To dispatch or in transit', href: '/orders?queue=dispatch' },
   { key: 'installation', label: 'Installations to finish', href: '/orders?queue=installation' },
+  { key: 'cash-to-collect', label: 'Cash to collect', href: '/orders?queue=cash-to-collect' },
   { key: 'quotesToPrepare', label: 'Quotations to prepare', href: '/quotations' },
   { key: 'openTickets', label: 'Open help requests', href: '/orders?queue=support' },
   { key: 'newLeads', label: 'New leads', href: '/leads?status=NEW' },

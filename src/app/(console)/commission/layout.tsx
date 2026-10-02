@@ -7,7 +7,7 @@ export default function CommissionLayout({ children }: { children: ReactNode }) 
     <>
       <PageHeader
         title="Commission"
-        description="What franchises earn on orders in their area, from accrual on payment to payout."
+        description="What franchises earn on orders in their area, from accrual on confirmation to payout."
       />
       <SubNav
         links={[

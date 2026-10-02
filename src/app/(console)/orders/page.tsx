@@ -36,7 +36,7 @@ interface OrderPage {
 
 const QUEUES = [
   ['all', 'All'],
-  ['awaiting-payment', 'Awaiting payment'],
+  ['cash-to-collect', 'Cash to collect'],
   ['needs-proof', 'Proofs to send'],
   ['with-customer', 'With customer'],
   ['production', 'Production'],
@@ -61,7 +61,10 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
 
   return (
     <>
-      <PageHeader title="Orders" description="Every order, from payment to installation.">
+      <PageHeader
+        title="Orders"
+        description="Every order, from confirmation to installation and cash collection."
+      >
         <SearchBox
           action="/orders"
           defaultValue={q}

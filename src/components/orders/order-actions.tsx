@@ -158,7 +158,7 @@ export function RecordPayment({
         open={open}
         onClose={() => setOpen(false)}
         title="Record a payment"
-        description={`${formatINR(duePaise, { paise: true })} is due. Online payments are recorded automatically; use this for cash, UPI to our account, bank transfers and payment links.`}
+        description={`${formatINR(duePaise, { paise: true })} is due. Record the cash or UPI collected on delivery, or a bank transfer.`}
       >
         <form onSubmit={submit} className="space-y-4">
           <Field
@@ -171,11 +171,10 @@ export function RecordPayment({
             <MoneyInput name="amount" required defaultValue={duePaise / 100} max={duePaise / 100} />
           </Field>
           <Field label="Received by">
-            <Select name="method" defaultValue="OFFLINE_UPI">
+            <Select name="method" defaultValue="OFFLINE_CASH">
+              <option value="OFFLINE_CASH">Cash</option>
               <option value="OFFLINE_UPI">UPI to company account</option>
               <option value="OFFLINE_BANK">Bank transfer (NEFT, IMPS, RTGS)</option>
-              <option value="PAYMENT_LINK">Payment link</option>
-              <option value="OFFLINE_CASH">Cash</option>
             </Select>
           </Field>
           <Field

@@ -22,7 +22,7 @@ sign-in cookies belong to this site wherever the API is hosted.
 1. **Add New > Project** and import this repository. `vercel.json` sets the build.
 2. Environment variables:
    - `API_URL`: the API's address, e.g. `https://neon-adda-api.onrender.com` (no trailing slash)
-   - `NEXT_PUBLIC_STORE_URL`: the storefront's address, for "view in shop" links
+   - `NEXT_PUBLIC_STORE_URL`: the storefront's address, for shop links and the standee QR code
    - `NEXT_PUBLIC_FIREBASE_*`: optional, for push notifications
 3. **Deploy**. Redeploy after changing a variable: they are read at build time.
 

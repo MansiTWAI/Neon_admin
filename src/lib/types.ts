@@ -29,7 +29,7 @@ export interface AdminOrder {
   orderNo: string;
   status: OrderStatus;
   paymentStatus: OrderPaymentStatus;
-  paymentMode: 'FULL' | 'ADVANCE';
+  paymentMode: 'FULL' | 'ADVANCE' | 'COD';
   channel: string;
   placedAt: string;
   confirmedAt: string | null;
@@ -109,6 +109,8 @@ export interface AdminOrder {
     scheduledEnd: string | null;
     completedAt: string | null;
     notes: string | null;
+    failReason: string | null;
+    photos: { id: string; stage: string; url: string }[];
   } | null;
   technicians: { id: string; name: string; phone: string; franchise: string | null }[];
   invoices: { invoiceNo: string; type: string; issuedAt: string }[];

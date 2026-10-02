@@ -44,6 +44,12 @@ const PROOF_LABEL = {
   SUPERSEDED: 'Replaced',
 };
 
+const CHANNEL_LABEL: Record<string, string> = {
+  WEB: 'Website',
+  QUOTE: 'From a quotation',
+  KIOSK: 'Franchise standee',
+};
+
 export default async function OrderPage({ params }: OrderPageProps) {
   const { orderNo } = await params;
   const order = await load<AdminOrder>(`/admin/orders/${encodeURIComponent(orderNo)}`);
@@ -67,8 +73,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
           </Badge>
         </div>
         <p className="mt-1 text-sm text-gray-500">
-          Placed {formatDateTime(order.placedAt)} ·{' '}
-          {order.channel === 'QUOTE' ? 'From a quotation' : 'Website'}
+          Placed {formatDateTime(order.placedAt)} · {CHANNEL_LABEL[order.channel] ?? 'Website'}
           {order.cancelReason && ` · Cancelled: ${order.cancelReason}`}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -171,7 +176,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
               action={
                 order.installation && (
                   <Badge tone={order.installation.completedAt ? 'green' : 'blue'}>
-                    {order.installation.status.toLowerCase()}
+                    {order.installation.status.replaceAll('_', ' ').toLowerCase()}
                   </Badge>
                 )
               }
@@ -182,9 +187,34 @@ export default async function OrderPage({ params }: OrderPageProps) {
                   {order.installation.technician && ` by ${order.installation.technician.name}`}.
                 </p>
               ) : ['CANCELLED', 'EXPIRED', 'PENDING_PAYMENT'].includes(order.status) ? (
-                <p className="text-sm text-gray-500">Scheduled once the order is paid.</p>
+                <p className="text-sm text-gray-500">Scheduled once the order is confirmed.</p>
               ) : (
                 <InstallationForm order={order} />
+              )}
+              {order.installation?.failReason && order.installation.status === 'FAILED' && (
+                <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+                  The technician could not finish: {order.installation.failReason}
+                </p>
+              )}
+              {order.installation && order.installation.photos.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {order.installation.photos.map((photo) => (
+                    <a
+                      key={photo.id}
+                      href={photo.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      title={photo.stage.toLowerCase()}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={photo.url}
+                        alt={`${photo.stage.toLowerCase()} photo`}
+                        className="size-20 rounded-lg object-cover"
+                      />
+                    </a>
+                  ))}
+                </div>
               )}
             </Card>
           )}
@@ -316,10 +346,16 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 ],
               ]}
             />
-            {order.paymentMode === 'ADVANCE' && (
+            {order.paymentMode === 'COD' ? (
               <p className="mt-3 text-xs text-gray-500">
-                Advance of {formatINR(totals.advanceRequiredPaise)} starts work.
+                Cash on delivery. Record the amount collected before completing the order.
               </p>
+            ) : (
+              order.paymentMode === 'ADVANCE' && (
+                <p className="mt-3 text-xs text-gray-500">
+                  Advance of {formatINR(totals.advanceRequiredPaise)} starts work.
+                </p>
+              )
             )}
             {order.payments.length > 0 && (
               <ul className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">
