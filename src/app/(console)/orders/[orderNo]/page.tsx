@@ -346,16 +346,15 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 ],
               ]}
             />
-            {order.paymentMode === 'COD' ? (
+            {order.paymentMode === 'COD' && totals.duePaise > 0 && (
               <p className="mt-3 text-xs text-gray-500">
                 Cash on delivery. Record the amount collected before completing the order.
               </p>
-            ) : (
-              order.paymentMode === 'ADVANCE' && (
-                <p className="mt-3 text-xs text-gray-500">
-                  Advance of {formatINR(totals.advanceRequiredPaise)} starts work.
-                </p>
-              )
+            )}
+            {order.paymentMode === 'ADVANCE' && totals.duePaise > 0 && (
+              <p className="mt-3 text-xs text-gray-500">
+                Advance of {formatINR(totals.advanceRequiredPaise)} starts work.
+              </p>
             )}
             {order.payments.length > 0 && (
               <ul className="mt-4 space-y-2 border-t border-gray-100 pt-4 text-sm">

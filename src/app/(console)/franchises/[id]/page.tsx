@@ -87,7 +87,7 @@ export default async function FranchisePage({ params }: { params: Promise<{ id: 
       </PageHeader>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Stat label="Paid orders" value={franchise.stats.orders} />
+        <Stat label="Confirmed orders" value={franchise.stats.orders} />
         <Stat label="Sales before GST" value={formatINR(franchise.stats.salesPaise)} />
         <Stat
           label="Commission owed"

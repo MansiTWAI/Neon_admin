@@ -40,7 +40,7 @@ export function toLocalInput(iso: string | null | undefined): string {
 export const fromLocalInput = (value: string) => (value ? new Date(`${value}:00+05:30`).toISOString() : null);
 
 export const ORDER_STATUS: Record<OrderStatus, { label: string; tone: Tone }> = {
-  PENDING_PAYMENT: { label: 'Awaiting payment', tone: 'amber' },
+  PENDING_PAYMENT: { label: 'Awaiting confirmation', tone: 'amber' },
   EXPIRED: { label: 'Expired', tone: 'gray' },
   CONFIRMED: { label: 'Confirmed', tone: 'blue' },
   PROOF_PENDING: { label: 'Proof sent', tone: 'violet' },
