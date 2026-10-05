@@ -46,7 +46,7 @@ export default async function DashboardPage() {
     <>
       <PageHeader title="Dashboard" description="Money in, and the work waiting on each team." />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         <Stat label="Collected today" value={formatINR(data.today.collectedPaise)} />
         <Stat label="Collected this month" value={formatINR(data.month.collectedPaise)} />
         <Stat label="Orders today" value={data.today.orders} />
