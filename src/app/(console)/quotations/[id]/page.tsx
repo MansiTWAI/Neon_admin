@@ -22,7 +22,7 @@ export default async function QuotationPage({ params }: { params: Promise<{ id: 
 
   const status = QUOTE_STATUS[quote.status];
   const request = quote.request;
-  const picture = quote.logoUrl ?? quote.previewUrl;
+  const picture = quote.logoUrl ?? quote.previewUrl ?? quote.referenceUrl;
   const priced = quote.items.length > 0;
 
   return (
@@ -106,6 +106,15 @@ export default async function QuotationPage({ params }: { params: Promise<{ id: 
                       className="mt-3 inline-block text-sm font-semibold text-brand hover:underline"
                     >
                       Download the original logo
+                    </a>
+                  )}
+                  {quote.referenceUrl && (
+                    <a
+                      href={quote.referenceUrl}
+                      download
+                      className="mt-3 inline-block text-sm font-semibold text-brand hover:underline"
+                    >
+                      Download the customer&apos;s design picture
                     </a>
                   )}
                 </div>

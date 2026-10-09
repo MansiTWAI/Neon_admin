@@ -149,6 +149,7 @@ export interface AdminQuote {
   lettering: Lettering | null;
   previewUrl: string | null;
   logoUrl: string | null;
+  referenceUrl: string | null;
   items: {
     id: string;
     description: string;
